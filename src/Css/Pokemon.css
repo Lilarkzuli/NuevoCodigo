@@ -6,7 +6,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  display:flex;
+  flex-direction: row;
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
   background-color: #242424;
@@ -16,6 +17,37 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Mantener solo el botón de reproducción */
+audio::-webkit-media-controls-play-button {
+  display: block !important;
+}
+
+/* Ocultar todos los demás controles */
+audio::-webkit-media-controls-panel,
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-seek-back-button,
+audio::-webkit-media-controls-seek-forward-button,
+audio::-webkit-media-controls-fullscreen-button,
+audio::-webkit-media-controls-overflow-button, /* Oculta el botón de "..." */
+audio::-webkit-media-controls-button-container
+/* audio::-webkit-media-controls-enclosure */
+ {
+  display: none !important;
+}
+
+/* Asegurar que el botón de reproducción esté centrado */
+audio::-webkit-media-controls-panel {
+  display: flex !important;
+  justify-content: center;
+  background-color: rgb(75, 8, 8);
+  
+}
+
 
 a {
   font-weight: 500;
@@ -41,28 +73,29 @@ h2 {
 img{
   width: 10em;
 }
+.boxall{
+  display: flex;
 
+}
 .box{
   width: 30em;
-
   display: flex;
   flex-direction: column;
   border: #440101 solid 0.3em;
   background-color: darkred;
-  margin:2em;
-  padding:2em;
+
+  padding:1.5em;
   border-radius: 25px;
  
 }
 .box2{
   width: 30em;
-
   display: flex;
-  flex-direction: row;
-  border: #440101 solid 0.3em;
+  flex-direction: column;
+  border: #440101 solid 0.3em ;
   background-color: darkred;
-  margin:2em;
-  padding:2em;
+ 
+  padding:1.5em;
   border-radius: 25px;
  
 }
@@ -79,7 +112,12 @@ img{
   
 }
 
-
+.gritobox{
+  display: flex;
+  justify-content:center;
+  flex-direction: column;
+  margin: 1em;
+}
 .boxtype{
   display: flex;
   justify-content:center;
@@ -92,7 +130,7 @@ img{
   display: flex;
   justify-content:center;
   flex-direction: row;
-    margin: 2em;
+    margin: 1em;
   
 }
 
@@ -136,4 +174,8 @@ h3{
 .cambboton:focus,
 .cambboton:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+.sonido{
+  width:auto;
+  color:red;
 }

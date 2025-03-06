@@ -40,9 +40,8 @@ const DatosPoke = ({ poke }) => {
 const Tipo = ({ poke }) => {
   if (!poke) return <div>Cargando datos...</div>;
   var datos = poke.types
-  console.log(datos[0])
   var tipo1 = datos[0].type
-  console.log(tipo1)
+  //si hay ese dato o no
 
   if (datos.length == 2) {
     var tipo2 = datos[1].type
@@ -54,8 +53,8 @@ const Tipo = ({ poke }) => {
 
   return (
     <div class="boxtype">
-      {/* <p class="margen"> <a href={tipo1.url}>{tipo1.name} </a></p> */}
-      <p class="margen"> <a href={`./Tipos.jsx/${tipo1.url}`}>{tipo1.name} </a></p>
+      
+      <p class="margen"> <a href={tipo1.url}>{tipo1.name} </a></p>
 
       {ensenartipo2}
     </div>
@@ -65,23 +64,46 @@ const Tipo = ({ poke }) => {
 
 //gritos
 const Gritos = ({ poke }) => {
+  
   if (!poke) return <div>Cargando datos...</div>;
   var lloros = poke.cries
   var lloro1 = lloros.latest
   console.log(lloro1)
 
 
-  return(
+  return (
     <>
-      <h3>Grito</h3>
-      <audio controls>
-        <source src={lloro1} type="audio/ogg"></source>
-      </audio>
+      <div class="gritobox">
+        <h3>Grito</h3>
+        <audio controls class="sonido">
+          <source src={lloro1} type="audio/ogg"></source>
+        </audio>
+      </div>
     </>
   )
-   
-  
+
+
 }
+
+
+//componente de las formas
+const Stats = ({ poke }) => {
+  if (!poke) return <div>Cargando datos...</div>;
+
+  return (
+    <div>
+
+      {poke.stats.map((stat, index) => (
+        <p key={index}>
+          {stat.stat.name}: {stat.base_stat}
+        </p>
+      ))}
+    </div>
+
+  )
+}
+
+
 
 //componente para mostrar las habilidades
 const Habilidades = ({ poke }) => {
@@ -131,32 +153,37 @@ function Pokemon() {
 
   return (
     <>
-      <div class="box">
-        <div class="subbox">
-          {/* Pasamos setPokemonData para que Findpoke actualice el estado en App */}
-          <Findpoke num={numero} setPokemonData={setPokemon} />
-         
-          {/* Mostrar los datos del Pokémon si ya están disponibles */}
+      <div class="boxall">
+        <div class="box">
+          <div class="subbox">
+            {/* Pasamos setPokemonData para que Findpoke actualice el estado en App */}
+            <Findpoke num={numero} setPokemonData={setPokemon} />
 
-          <DatosPoke poke={pokemon} />
-          
-          <Gritos poke={pokemon}/>
-          <h3>Tipo</h3>
+            {/* Mostrar los datos del Pokémon si ya están disponibles */}
 
-          <Tipo poke={pokemon} />
-          <h3>Habilidad</h3>
-          <Habilidades poke={pokemon} />
+            <DatosPoke poke={pokemon} />
+
+            <Gritos poke={pokemon} />
+            <h3>Tipo</h3>
+
+            <Tipo poke={pokemon} />
+            <h3>Habilidad</h3>
+            <Habilidades poke={pokemon} />
+
+          </div>
+          <div class="boxboton">
+            <button class="cambboton" onClick={Disminuir}> <FaArrowLeft /></button>
+            <button class="cambboton" onClick={Aumentar}><FaArrowRight /></button>
+          </div>
+        </div>
+
+        <div class="box2">
+          <div class="subbox">
+            <Stats poke={pokemon} />
+
+          </div>
 
         </div>
-        <div class="boxboton">
-          <button  class="cambboton" onClick={Disminuir}> <FaArrowLeft /></button>
-          <button  class="cambboton" onClick={Aumentar}><FaArrowRight /></button>
-          </div>
-      </div>
-      <div class="box2">
-        
-
-
       </div>
     </>
   );
