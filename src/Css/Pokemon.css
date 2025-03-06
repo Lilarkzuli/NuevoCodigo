@@ -1,0 +1,139 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 5em;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 2.2em;
+  line-height: 1.1;
+  font-family:fantasy;
+}
+img{
+  width: 10em;
+}
+
+.box{
+  width: 30em;
+
+  display: flex;
+  flex-direction: column;
+  border: #440101 solid 0.3em;
+  background-color: darkred;
+  margin:2em;
+  padding:2em;
+  border-radius: 25px;
+ 
+}
+.box2{
+  width: 30em;
+
+  display: flex;
+  flex-direction: row;
+  border: #440101 solid 0.3em;
+  background-color: darkred;
+  margin:2em;
+  padding:2em;
+  border-radius: 25px;
+ 
+}
+.subbox{
+  border-radius: 25px;
+  border: #5c5c5c solid 0.3em;
+  background-color: rgb(255, 255, 255);
+}
+.spritebox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  
+}
+
+
+.boxtype{
+  display: flex;
+  justify-content:center;
+  flex-direction: row;
+  margin: 2em;
+  
+}
+
+.habilibox{
+  display: flex;
+  justify-content:center;
+  flex-direction: row;
+    margin: 2em;
+  
+}
+
+.boxboton{
+  display: flex;
+  justify-content:center;
+  flex-direction: row;
+    margin: 1em;
+  
+}
+.margen{
+ margin: auto;
+  
+}
+h3{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.peque{
+  width: 1em;
+  height: 1em;
+}
+.cambboton{
+  
+  display: inline-block;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 0.5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin: 1em;
+}
+.cambboton:hover {
+  border-color: #646cff;
+}
+.cambboton:focus,
+.cambboton:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
