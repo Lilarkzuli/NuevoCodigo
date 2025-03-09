@@ -1,12 +1,10 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jersey+10&display=swap");
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  display:flex;
+  display: flex;
   flex-direction: row;
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
@@ -35,8 +33,7 @@ audio::-webkit-media-controls-seek-forward-button,
 audio::-webkit-media-controls-fullscreen-button,
 audio::-webkit-media-controls-overflow-button, /* Oculta el botón de "..." */
 audio::-webkit-media-controls-button-container
-/* audio::-webkit-media-controls-enclosure */
- {
+/* audio::-webkit-media-controls-enclosure */ {
   display: none !important;
 }
 
@@ -45,18 +42,20 @@ audio::-webkit-media-controls-panel {
   display: flex !important;
   justify-content: center;
   background-color: rgb(75, 8, 8);
-  
 }
 
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 a {
   font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
 }
-a:hover {
+/* a:hover {
   color: #535bf2;
-}
+}  */
 
 body {
   margin: 0;
@@ -65,97 +64,112 @@ body {
   min-height: 100vh;
 }
 
+p{
+  margin: 0.3em;
+}
 h2 {
   font-size: 2.2em;
   line-height: 1.1;
-  font-family:fantasy;
+  text-transform: capitalize;
+  font-family: fantasy;
 }
-img{
+img {
   width: 10em;
 }
-.boxall{
+.boxall {
   display: flex;
-
+  
 }
-.box{
+.box {
   width: 30em;
   display: flex;
   flex-direction: column;
   border: #440101 solid 0.3em;
   background-color: darkred;
 
-  padding:1.5em;
+  padding: 1.5em;
   border-radius: 25px;
- 
 }
-.box2{
+.box2 {
   width: 30em;
   display: flex;
   flex-direction: column;
-  border: #440101 solid 0.3em ;
+  border: #440101 solid 0.3em;
   background-color: darkred;
- 
-  padding:1.5em;
+
+  padding: 1.5em;
   border-radius: 25px;
- 
 }
-.subbox{
+.subbox {
   border-radius: 25px;
   border: #5c5c5c solid 0.3em;
   background-color: rgb(255, 255, 255);
 }
-.spritebox{
+.spritebox {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  
 }
 
-.gritobox{
+.gritobox {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
   margin: 1em;
 }
-.boxtype{
+.boxtype {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: row;
   margin: 2em;
-  
 }
 
-.habilibox{
+.habilibox {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: row;
-    margin: 1em;
-  
+  margin: 1em;
 }
 
-.boxboton{
+.statsbox{
   display: flex;
-  justify-content:center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 1em;
+  
+
+}
+th{
+  text-align: left;
+}
+td{
+  text-align: left;
+}
+.boxboton {
+  display: flex;
+  justify-content: center;
   flex-direction: row;
-    margin: 1em;
-  
+  margin: 1em;
 }
-.margen{
- margin: auto;
-  
+.margen {
+  margin: auto;
 }
-h3{
+h3 {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
-.peque{
+.peque {
   width: 1em;
   height: 1em;
 }
-.cambboton{
+
+.mediano{
+  width:5em;
+  height: auto;
   
+}
+.cambboton {
   display: inline-block;
   border-radius: 8px;
   border: 1px solid transparent;
@@ -174,8 +188,82 @@ h3{
 .cambboton:focus,
 .cambboton:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+
 }
-.sonido{
-  width:auto;
-  color:red;
+.sonido {
+  width: auto;
+  color: red;
 }
+.tipos {
+  padding: 0.5em;
+  border: #000000 solid 0.1em;
+  border-radius: 25px;
+  color: white;
+  text-transform: uppercase;
+  width:4.5em;
+  text-align: center;
+
+  
+}
+
+.tipos a{
+  color:white;
+}
+
+/* 
+aqui abajo son los tipos de los pokemon */
+.normal{
+  background-color: rgb(198, 198, 198);
+}
+.grass {
+  background-color: green;
+}
+
+.poison {
+  background-color: rgb(211, 0, 183);
+}
+.fire{
+  background-color: red;
+}
+.water{
+  background-color: rgb(21, 156, 190);
+}
+.flying{
+  background-color: rgb(120, 223, 255);
+}
+.bug{
+  background-color: chartreuse;
+}
+.electric{
+  background-color: yellow;
+}
+.ground{
+  background-color: peru;
+}
+.fairy{
+  background-color: fuchsia;
+}
+.fighting{
+  background-color: rgb(255, 60, 145);
+}
+.psychic{
+  background-color: rgb(171, 14, 82);
+
+}
+.rock{
+  background-color: rgb(92, 46, 30);
+}
+.steel{
+  background-color: gray;
+}
+.ice{
+  background-color: aquamarine;
+}
+.ghost{
+  background-color: darkviolet;
+}
+.dragon{
+  background-color: mediumblue;
+}
+.dark{
+ background-color: #242424;}
