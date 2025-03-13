@@ -86,96 +86,50 @@ const Gritos = ({ poke }) => {
 };
 
 
-const Findevo = ({ numer, poke }) => {
+const Findevo = ({  poke }) => { //numer es la pokedex
   console.log(poke)
-  if (!poke) return <div>Cargando datos...</div>
-  const [numero, setNumero] = useState(1)
-  const [vueltas, setVueltas] = useState(1); // Número de evolución actual
-  const [evo, setEvo] = useState([]);
-
-
   
+  if (!poke) return <div>Cargando datos...</div>
+  const [evoChain, setEvoChain] = useState([]);
 
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/evolution-chain/${vueltas}/`)
-      .then((result) => result.json())
-      .then((data) => {
-        // Estado para almacenar la cadena de evolución
+    if (!poke) return;
 
-        var n_poke = poke.name
-        var nombre = data.chain
-        var evos = recorrerEvoluciones(nombre)
-        setEvo(evos)
-
-
-
-        if (!evos.includes(n_poke)) {
-
-          if( numer < numero){
-            var resul= numero- numer
-            console.log("este resta: " . resul)
-            console.log(resul)
-            setVueltas((prev) => Math.max(prev - resul, 1));
-            setNumero (Math.min(numer, 1));
-
-          }
-
-          else {
-
-            var resul= numero -numer;
-            console.log("este suma: " . resul)
-            setVueltas(anterior => anterior + 1)
-            setNumero(numer)
-          }
-
-
-        }
-
-
-
-
+    // Obtener la cadena de evolución desde la especie del Pokémon
+    fetch(poke.species.url)
+      .then(res => res.json())
+      .then(speciesData => {
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+        return fetch(evolutionChainUrl);
       })
-      .catch((error) =>{
-
-        console.error("Error al obtener datos:", error)
-        setVueltas(anterior => anterior + 1)
-
-      })
-
-  }, [numer, poke, vueltas]); // Solo depende de numer
-
-  console.log(evo, vueltas)
+      .then(res => res.json())
+      .then(chainData => {
+        const evolutions = recorrerEvoluciones(chainData.chain);
+        setEvoChain(evolutions);
+      })  .catch(console.error);
+    }, [poke]); // Solo depende del Pokémon actual
 
 
-  if(evo.includes(poke.name) ){
-   
+
+ 
+
     return (
       <div>
         <h3>Cadena de Evolución</h3>
         <ul>
           {
-            evo.map(item =>
+            evoChain.map(item =>
               <li>{item}</li>
             )
           }
         </ul>
 
       </div>
-    )
-    setNumero(1)
-  }
-  else{
-    return (
-        <div>
-          <h3>Cadena de Evolución</h3>
-          <ul>
-           Cargando...
-          </ul>
 
-        </div>
-      );
-    }
+    )
+
   }
+
 
 
 
@@ -304,15 +258,15 @@ function Pokemon() {
 
       console.log(event.target.value, typeof event.target.value);
       var num = event.target.value;
-      num=parseInt(num)
-
+      num = parseInt(num)
       if (num > 1 && num < 1009) {
         setNumero(num); // Actualiza el número solo cuando se presiona Enter
       } else if (num === "") {
         setNumero(1); // Si el campo está vacío, vuelve a 1
       }
-    w
-    }}
+      
+    }
+  }
 
   return (
     <>
@@ -336,7 +290,7 @@ function Pokemon() {
               {" "}
               <FaArrowLeft />
             </button>
-            <input class="mediano"  type="number" min="1" max="1009"  onKeyDown={esenumero}></input>
+            <input class="mediano" type="number" min="1" max="1009" onKeyDown={esenumero}></input>
             <button class="cambboton" onClick={Aumentar}>
               <FaArrowRight />
             </button>
