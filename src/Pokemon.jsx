@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import "./Css/Pokemon.css";
-
 import { FaArrowLeft } from "react-icons/fa";
-
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+
 
 // Componente para obtener los datos del Pokémon
 const Findpoke = ({ num, setPokemonData }) => {
@@ -44,20 +44,19 @@ const Tipo = ({ poke }) => {
   var datos = poke.types;
   var tipo1 = datos[0].type;
 
-  var ensenartipo1 = (
-    <p className={`margen ${tipo1.name} tipos`}>
-      {" "}
-      <a href={tipo1.url}>{tipo1.name} </a>
+  const ensenartipo1 = (
+    <p className={`margen ${tipo1.name} tipos`}>  
+      <Link to={`/Tipos/${tipo1.name}`}>{tipo1.name}</Link>
+      
     </p>
   );
-  //si hay ese dato o no entonces, lo mostrará o no
+
   const ensenartipo2 =
     datos.length === 2 ? (
       <p className={`margen ${datos[1].type.name} tipos`}>
-        <a href={datos[1].type.url}>{datos[1].type.name}</a>
+        <Link to={`/Tipos/${datos[1].type.name}`}>{datos[1].type.name}</Link>
       </p>
-    ) : null; // Si no hay segundo tipo, no se renderiza
-
+    ) : null;
   return (
     <div class="boxtype">
       {ensenartipo1}
@@ -86,9 +85,58 @@ const Gritos = ({ poke }) => {
 };
 
 
-const Findevo = ({  poke }) => { //numer es la pokedex
+
+
+
+
+const Descrip = ({ poke }) => { //numer es la pokedex
   console.log(poke)
+
+  if (!poke) return <div>Cargando datos...</div>
+  const [descrip, setdescrip] = useState();
+
+  useEffect(() => {
+    if (!poke) return;
+
+    // Obtener la cadena de evolución desde la especie del Pokémon
+    fetch(poke.species.url)
+      .then(res => res.json())
+      .then(speciesData => {
+        
+        const species= speciesData.flavor_text_entries;
+        console.log(species)
+        for( let x=0;  x < species.length ; x++){
+          console.log("goog")
+
+          var desc=species[x]
+          if( desc.language.name == "es"){
+            console.log("vsmo")
+          }
+          
+        }
+      
+       
+        setdescrip(species.flavor_text)
+        
+        console.log(species)
+      }).catch(console.error);
+  }, [poke]); // Solo depende del Pokémon actual
   
+  return(
+    <div>
+
+      <h3> Descripción</h3>
+      <p> {descrip}</p>
+    </div>
+
+  )
+
+
+
+
+}
+const Findevo = ({ poke }) => { //numer es la pokedex
+
   if (!poke) return <div>Cargando datos...</div>
   const [evoChain, setEvoChain] = useState([]);
 
@@ -106,29 +154,29 @@ const Findevo = ({  poke }) => { //numer es la pokedex
       .then(chainData => {
         const evolutions = recorrerEvoluciones(chainData.chain);
         setEvoChain(evolutions);
-      })  .catch(console.error);
-    }, [poke]); // Solo depende del Pokémon actual
+      }).catch(console.error);
+  }, [poke]); // Solo depende del Pokémon actual
 
 
 
- 
 
-    return (
-      <div>
-        <h3>Cadena de Evolución</h3>
-        <ul>
-          {
-            evoChain.map(item =>
-              <li>{item}</li>
-            )
-          }
-        </ul>
 
-      </div>
+  return (
+    <div>
+      <h3>Cadena de Evolución</h3>
+      <ul>
+        {
+          evoChain.map(item =>
+            <li>{item}</li>
+          )
+        }
+      </ul>
 
-    )
+    </div>
 
-  }
+  )
+
+}
 
 
 
@@ -148,6 +196,9 @@ function recorrerEvoluciones(chain) {
   return evolutions;
 
 }
+
+
+
 //componente de las stats
 const Stats = ({ poke }) => {
   if (!poke) return <div>Cargando datos...</div>;
@@ -264,7 +315,7 @@ function Pokemon() {
       } else if (num === "") {
         setNumero(1); // Si el campo está vacío, vuelve a 1
       }
-      
+
     }
   }
 
@@ -299,9 +350,11 @@ function Pokemon() {
 
         <div class="box2">
           <div class="subbox">
+            <Descrip poke={pokemon}/>
             <Stats poke={pokemon} />
             {/* <Movimiento  poke={pokemon} /> */}
             <Findevo numer={numero} poke={pokemon} />
+            
           </div>
         </div>
       </div>
