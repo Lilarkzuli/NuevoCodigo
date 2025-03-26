@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Jersey+10&display=swap");
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  display: flex;
+  /* flex-direction: row; */
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #242424;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+
+.pokemon-wrapper {
+  width: 100vw;
+  padding:  0.1em;
+  box-sizing: border-box;
+}
+
+.scroll-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-bottom:  0.1em;
+}
+
+.item-link {
+  text-decoration: none;
+  margin-right:  0.1em;
+  flex: 0 0 auto;
+}
+
+.item-box {
+  min-width: 150px;
+  background-color: #f2f2f2;
+  border-radius:  25%;
+  padding: 0.1em;
+  margin:2em;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 2s, height 4s;
+}
+
+.item-box:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  width:9.5em;
+  height: 9em;
+}
+
+.item-name {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.item-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.scroll-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+} 
+.scroll-top-button:hover {
+  background-color: #08294d;
+} 
+
+
+
+.tipos {
+  padding: 0.5em;
+  border: #000000 solid 0.1em;
+  border-radius: 25px;
+  color: white;
+  text-transform: uppercase;
+  width:4.5em;
+  text-align: center;
+
+  
+}
+
+.tipos a{
+  color:white;
+}
+
+/* 
+aqui abajo son los tipos de los pokemon */
+.normal{
+  background-color: rgb(198, 198, 198);
+}
+.grass {
+  background-color: green;
+}
+
+.poison {
+  background-color: rgb(211, 0, 183);
+}
+.fire{
+  background-color: red;
+}
+.water{
+  background-color: rgb(21, 156, 190);
+}
+.flying{
+  background-color: rgb(120, 223, 255);
+}
+.bug{
+  background-color: chartreuse;
+}
+.electric{
+  background-color: rgb(243, 243, 96);
+}
+.ground{
+  background-color: peru;
+}
+.fairy{
+  background-color: fuchsia;
+}
+.fighting{
+  background-color: rgb(255, 60, 145);
+}
+.psychic{
+  background-color: rgb(171, 14, 82);
+
+}
+.rock{
+  background-color: rgb(92, 46, 30);
+}
+.steel{
+  background-color: gray;
+}
+.ice{
+  background-color: aquamarine;
+}
+.ghost{
+  background-color: darkviolet;
+}
+.dragon{
+  background-color: mediumblue;
+}
+.dark{
+ background-color: #242424;}

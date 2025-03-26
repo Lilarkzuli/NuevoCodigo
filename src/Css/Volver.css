@@ -1,0 +1,40 @@
+
+
+
+button {
+    --primary-color: #6b2424;
+    --secondary-color: #fff;
+    --hover-color: #111;
+    --arrow-width: 10px;
+    --arrow-stroke: 2px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 20px;
+    color: var(--secondary-color);
+    padding: 1em 1.8em;
+    background: var(--primary-color);
+    display: flex;
+    transition: 0.2s background;
+    align-items: center;
+    gap: 0.6em;
+    font-weight: bold;
+    margin-bottom:2em;
+    margin-top:2em;
+  }
+  
+
+  
+ .arrow-text{
+
+    color:white;
+ }
+  
+
+ .arrow{
+    margin-right:1em;
+ }
+
+button:hover{
+   background-color:rgb(56, 20, 20) ;
+   transition-property:  sliding-vertically;
+}

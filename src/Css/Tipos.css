@@ -66,9 +66,7 @@ body {
 
 p{
   margin: 0.3em;
-  color:#000000;
 }
-
 h2 {
   font-size: 2.2em;
   line-height: 1.1;
@@ -141,10 +139,12 @@ img {
   
 
 }
-th, td{
+th{
   text-align: left;
 }
-
+td{
+  text-align: left;
+}
 .boxboton {
   display: flex;
   justify-content: center;
@@ -159,8 +159,6 @@ h3 {
   justify-content: center;
   align-items: center;
 }
-
-
 .peque {
   width: 1em;
   height: 1em;
@@ -185,7 +183,7 @@ h3 {
   margin: 1em;
 }
 .cambboton:hover {
-  border-color: #1a065b;
+  border-color: #646cff;
 }
 .cambboton:focus,
 .cambboton:focus-visible {
@@ -268,4 +266,4 @@ aqui abajo son los tipos de los pokemon */
   background-color: mediumblue;
 }
 .dark{
- background-color: #352323;}
+ background-color: #242424;}

@@ -1,27 +1,31 @@
-import { useState, useEffect, useRef, Fragment } from "react";
+import { useState, useEffect, useRef, Fragment, Suspense } from "react";
 import "./Css/Pokemon.css";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import Volver from "./Volver";
+
+import Load from './Loading';
 
 
-// Componente para obtener los datos del Pokémon
-const Findpoke = ({ num, setPokemonData }) => {
+// // Componente para obtener los datos del Pokémon
+const Findpoke = ({ setPokemonData, nombre }) => {
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${num}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`)
       .then((result) => result.json())
       .then((data) => {
         setPokemonData(data); //envia los fatos
         console.log(data);
       })
       .catch((error) => console.error("Error al obtener datos:", error));
-  }, [num, setPokemonData]);
+
+  }, [setPokemonData]);
 };
 
-// Componente para mostrar los datos del Pokémon
+// // Componente para mostrar los datos del Pokémon
 const DatosPoke = ({ poke }) => {
-  if (!poke) return <div>Cargando datos...</div>;
-
+  if (!poke) return <div>Cargando datos...</div>
   return (
     <div class="spritebox">
       <h2>
@@ -38,23 +42,23 @@ const DatosPoke = ({ poke }) => {
   );
 };
 
-//componente para tipo
+// //componente para tipo
 const Tipo = ({ poke }) => {
   if (!poke) return <div>Cargando datos...</div>;
   var datos = poke.types;
   var tipo1 = datos[0].type;
 
   const ensenartipo1 = (
-    <p className={`margen ${tipo1.name} tipos`}>  
-      <Link to={`/Tipos/${tipo1.name}`}>{tipo1.name}</Link>
-      
+    <p className={`margen ${tipo1.name} tipos`}>
+      <Link to={`/pages/tipos/${tipo1.name}`}>{tipo1.name}</Link>
+
     </p>
   );
 
   const ensenartipo2 =
     datos.length === 2 ? (
       <p className={`margen ${datos[1].type.name} tipos`}>
-        <Link to={`/Tipos/${datos[1].type.name}`}>{datos[1].type.name}</Link>
+        <Link to={`/pages/tipos/${datos[1].type.name}`}>{datos[1].type.name}</Link>
       </p>
     ) : null;
   return (
@@ -102,42 +106,31 @@ const Descrip = ({ poke }) => { //numer es la pokedex
     fetch(poke.species.url)
       .then(res => res.json())
       .then(speciesData => {
-        
-        const species= speciesData.flavor_text_entries;
-        console.log(species)
-        for( let x=0;  x < species.length ; x++){
-          console.log("goog")
 
-          var desc=species[x]
-          if( desc.language.name == "es"){
-            console.log("vsmo")
+        const species = speciesData.flavor_text_entries;
+        console.log(species)
+        for (let x = 0; x < species.length; x++) {
+          var desc = species[x]
+          if (desc.language.name == "es") {
+
+            setdescrip(desc.flavor_text)
           }
-          
         }
-      
-       
-        setdescrip(species.flavor_text)
-        
         console.log(species)
       }).catch(console.error);
   }, [poke]); // Solo depende del Pokémon actual
-  
-  return(
+  return (
     <div>
-
-      <h3> Descripción</h3>
-      <p> {descrip}</p>
+      <h3>Descripción</h3>
+      <p>{descrip}</p>
     </div>
-
   )
-
-
 
 
 }
 const Findevo = ({ poke }) => { //numer es la pokedex
 
-  if (!poke) return <div>Cargando datos...</div>
+  // if (!poke) return <div>Cargando datos...</div>
   const [evoChain, setEvoChain] = useState([]);
 
   useEffect(() => {
@@ -156,9 +149,6 @@ const Findevo = ({ poke }) => { //numer es la pokedex
         setEvoChain(evolutions);
       }).catch(console.error);
   }, [poke]); // Solo depende del Pokémon actual
-
-
-
 
 
   return (
@@ -226,38 +216,7 @@ const Stats = ({ poke }) => {
   );
 };
 
-//componentes de movimiento
-const Movimiento = ({ poke }) => {
-  if (!poke) return <div>Cargando datos...</div>;
 
-  // Obtener los movimientos
-  const movimientos = poke.moves;
-  // console.log(movimientos)
-
-  return (
-    <>
-      <div class="statsbox ">
-        <h3>Movimientos</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Movimiento</th>
-              <th>Nivel</th>
-            </tr>
-          </thead>
-          <tbody>
-            {movimientos.map((datos, index) => (
-              <tr key={index}>
-                <td>{datos.move.name}</td>
-                <td> {index}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-};
 
 //componente para mostrar las habilidades
 const Habilidades = ({ poke }) => {
@@ -287,47 +246,23 @@ const Habilidades = ({ poke }) => {
     </div>
   );
 };
+
+
+
+
 function Pokemon() {
-  const [numero, setNumero] = useState(1); // Número del Pokémon
-  const [pokemon, setPokemon] = useState(null); // Datos del Pokémon
-
-  const Aumentar = () => {
-    if (numero < 1009) {
-      setNumero(numero + 1);
-    }
-  };
-
-  const Disminuir = () => {
-    if (numero > 1) {
-      setNumero(numero - 1);
-
-    }
-  };
-
-  const esenumero = (event) => {
-    if (event.key === "Enter") {
-
-      console.log(event.target.value, typeof event.target.value);
-      var num = event.target.value;
-      num = parseInt(num)
-      if (num > 1 && num < 1009) {
-        setNumero(num); // Actualiza el número solo cuando se presiona Enter
-      } else if (num === "") {
-        setNumero(1); // Si el campo está vacío, vuelve a 1
-      }
-
-    }
-  }
+  const { poke } = useParams();
+  const [pokemon, setPokemon] = useState(null);
 
   return (
     <>
-      <div class="boxall">
-        <div class="box">
-          <div class="subbox">
-            {/* Pasamos setPokemonData para que Findpoke actualice el estado en App */}
-            <Findpoke num={numero} setPokemonData={setPokemon} />
+      <Volver />
+      <div className="boxall">
 
-            {/* Mostrar los datos del Pokémon si ya están disponibles */}
+        <div className="box">
+          <div className="subbox">
+
+            <Findpoke nombre={poke} setPokemonData={setPokemon} />
 
             <DatosPoke poke={pokemon} />
             <h3>Tipo</h3>
@@ -335,31 +270,28 @@ function Pokemon() {
             <h3>Habilidad</h3>
             <Habilidades poke={pokemon} />
             <Gritos poke={pokemon} />
-          </div>
-          <div class="boxboton">
-            <button class="cambboton" onClick={Disminuir} >
-              {" "}
-              <FaArrowLeft />
-            </button>
-            <input class="mediano" type="number" min="1" max="1009" onKeyDown={esenumero}></input>
-            <button class="cambboton" onClick={Aumentar}>
-              <FaArrowRight />
-            </button>
+
           </div>
         </div>
 
         <div class="box2">
           <div class="subbox">
-            <Descrip poke={pokemon}/>
+            <Descrip poke={pokemon} />
             <Stats poke={pokemon} />
             {/* <Movimiento  poke={pokemon} /> */}
-            <Findevo numer={numero} poke={pokemon} />
-            
+            <Findevo poke={pokemon} />
+
           </div>
+
+
         </div>
       </div>
     </>
-  );
+  )
 }
+
+
+
+
 
 export default Pokemon;
